@@ -12,19 +12,44 @@ For assistance:
 */
 
 
-
+const itemsPerPage = 9;
 /*
 Create the `showPage` function
 This function will create and insert/append the elements needed to display a "page" of nine students
 */
+function showPage (list, page){
+   const startIndex = (page * itemsPerPage) - itemsPerPage;
+   const endIndex = page * itemsPerPage;
 
+   const ul = document.querySelector('.student-list');
+   ul.innerHTML = '';
 
+   for (let i = 0; i < list.length; i++){
+      const li = list[i]
+      if (i >= startIndex && i < endIndex){
+         let studentCard = `
+          <li class="student-item cf">
+            <div class="student-details">
+               <img class="avatar" src="${li.picture.thumbnail}" alt="Profile Picture">
+               <h3>${li.name.first} ${li.name.last}</h3>
+               <span class="email">${li.email}</span>
+            </div>
+            <div class="joined-details">
+               <span class="date">${li.registered.date}</span>
+            </div>
+         </li>
+         `;
+         ul.insertAdjacentHTML('beforeend', studentCard);
+      }
+   }
+}
+showPage(data, 1);
 
 /*
 Create the `addPagination` function
 This function will create and insert/append the elements needed for the pagination buttons
 */
-
+//function addPagination(){}
 
 
 // Call functions
