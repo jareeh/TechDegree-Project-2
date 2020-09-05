@@ -3,20 +3,17 @@ Treehouse Techdegree:
 FSJS Project 2 - Data Pagination and Filtering
 */
 
-
-
-/*
-For assistance:
-   Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
-   Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
-*/
-let filteredStudents = [];
-
+//Establish Global Variables
 const itemsPerPage = 9;
-/*
-Create the `showPage` function
-This function will create and insert/append the elements needed to display a "page" of nine students
-*/
+
+
+/**
+ * `showPage` function
+ * This function will create and insert/append the elements needed to display a "page" of nine students
+ * @param {array} List The array of objects that will determine how many page button elements are created.
+ * @param {number} Page The 'page' number of results to show.
+ * Returns nothing.
+ */
 function showPage (list, page){
    const startIndex = (page * itemsPerPage) - itemsPerPage;
    const endIndex = page * itemsPerPage;
@@ -45,10 +42,12 @@ function showPage (list, page){
 }
 
 
-/*
-Create the `addPagination` function
-This function will create and insert/append the elements needed for the pagination buttons
-*/
+/**
+ * `addPagination` function
+ * This function will create and insert/append the elements needed for the pagination buttons
+ * @param {array} List The array of objects that will determine how many page button elements are created.
+ * Returns nothing. 
+ */
 function addPagination(list){
    const numPages = Math.ceil(list.length / itemsPerPage);
    const linkList = document.querySelector('.link-list');
@@ -76,6 +75,13 @@ function addPagination(list){
    });
 }
 
+
+/**
+ * `addSearch` function
+ * This function will dynamically add the elements for the search bar in the heading
+ * No parameters
+ * Returns nothing. 
+ */
 function addSearch(){
    const header = document.querySelector('.header');
    const searchBar = `
@@ -87,6 +93,13 @@ function addSearch(){
    header.insertAdjacentHTML('beforeend', searchBar);
 };
 
+
+/**
+ * `search` function
+ * This function is essentially the seach 'controller'
+ * No parameters
+ * Returns nothing. 
+ */
 function search(){
    const searchButton = document.querySelector('.header button');
    const searchField = document.querySelector('.header input');
@@ -94,6 +107,13 @@ function search(){
    searchField.addEventListener('keyup', () => {runSearch()});
 };
 
+
+/**
+ * `runSearch` function
+ * This function is responsible for the actual filtering action of the student list items.
+ * No parameters
+ * Returns nothing. 
+ */
 function runSearch(){
    const names = document.querySelectorAll('.student-item')
    const searchQuery = document.querySelector('#search').value.toLowerCase();
@@ -105,6 +125,7 @@ function runSearch(){
       }
    }
 }
+
 
 // Call functions
 showPage(data, 1);
