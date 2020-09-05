@@ -10,7 +10,7 @@ For assistance:
    Check out the "Project Resources" section of the Instructions tab: https://teamtreehouse.com/projects/data-pagination-and-filtering#instructions
    Reach out in your Slack community: https://treehouse-fsjs-102.slack.com/app_redirect?channel=unit-2
 */
-
+let filteredStudents = [];
 
 const itemsPerPage = 9;
 /*
@@ -76,7 +76,38 @@ function addPagination(list){
    });
 }
 
+function addSearch(){
+   const header = document.querySelector('.header');
+   const searchBar = `
+      <label for="search" class="student-search">
+         <input id="search" placeholder="Search by name...">
+         <button type="button"><img src="img/icn-search.svg" alt="Search icon"></button>
+   </label>
+   `;
+   header.insertAdjacentHTML('beforeend', searchBar);
+};
+
+function search(){
+   const searchButton = document.querySelector('.header button');
+   const searchField = document.querySelector('.header input');
+   searchButton.addEventListener('click', () => {runSearch()});
+   searchField.addEventListener('keyup', () => {runSearch()});
+};
+
+function runSearch(){
+   const names = document.querySelectorAll('.student-item')
+   const searchQuery = document.querySelector('#search').value.toLowerCase();
+
+   for (let i = 0; i < names.length; i++){
+      names[i].style.display = 'block';
+      if(!names[i].children[0].children[1].textContent.toLowerCase().includes(searchQuery)){
+         names[i].style.display = 'none';
+      }
+   }
+}
 
 // Call functions
 showPage(data, 1);
 addPagination(data);
+addSearch();
+search();
