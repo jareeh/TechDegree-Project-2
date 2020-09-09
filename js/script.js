@@ -80,7 +80,7 @@ function addPagination(list){
                allButtons[i].className = '';
             }
             e.target.className = 'active';
-            showPage(data, parseInt(buttonNumber))
+            showPage(list, parseInt(buttonNumber))
          }
       });
    }
